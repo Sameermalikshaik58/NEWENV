@@ -1,0 +1,5272 @@
+{
+	"info": {
+		"_postman_id": "44a91ad5-bba4-4b49-909b-1839073a2e3e",
+		"name": "BusinessControllerIntegrationTestSuite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SpsRestJobs BC WS",
+			"item": [
+				{
+					"name": "GetEntity Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.uwi).to.exist;\r",
+									"        pm.globals.set(\"uwi\", valData.uwi);\r",
+									"        pm.expect(valData.pdenId).to.exist;\r",
+									"        pm.globals.set(\"pdenId\", valData.pdenId);\r",
+									"        pm.expect(valData.pdenType).to.exist;\r",
+									"        pm.globals.set(\"type\", valData.pdenType);\r",
+									"        pm.expect(valData.source).to.exist;\r",
+									"        pm.globals.set(\"source\", valData.source);\r",
+									"        pm.expect(valData.parentStratUnitId).to.exist;\r",
+									"        pm.globals.set(\"stratUnitId\", valData.parentStratUnitId);\r",
+									"        pm.expect(valData.stringId).to.exist;\r",
+									"        pm.globals.set(\"stringId\", valData.stringId);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"psKey\",\"UWI=\"+valData.uwi \r",
+									"        +\"|SOURCE=\" + valData.source +\"|STRING_ID=\" + valData.stringId);\r",
+									"        pm.globals.set(\"pdenKey\", valData.uniqueIdentifier);\r",
+									"        pm.globals.set(\"ppzKey\",\"PDEN_ID=\"+ valData.pdenId \r",
+									"        +\"|PDEN_TYPE=\" + valData.pdenType +\"|SOURCE=\" + valData.source\r",
+									"        +\"|STRAT_UNIT_ID=\" + valData.parentStratUnitId);\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId\") +\",\"+ pm.globals.get(\"type\") +\",\"+\r",
+									"            pm.globals.get(\"source\") +\",\"+ pm.globals.get(\"stratUnitId\")\r",
+									"             +\",\"+ pm.globals.get(\"uwi\") +\",\"+ pm.globals.get(\"stringId\")\r",
+									"             +\",\"+ pm.globals.get(\"psKey\") +\",\"+ \r",
+									"            pm.globals.get(\"pdenKey\") +\",\"+ pm.globals.get(\"ppzKey\")\r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenswithcrossreferencedetails+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens?fields=uwi,pdenId,pdenType,source,parentStratUnitId,stringId,uniqueIdentifier&orderBy=pdenid desc&Filter=provincestate=equals('NM')&Filter=activeind=equals('Y')&PageSize=1&Filter=uwi=notcontains('NM')&Filter=commingled=equals('N')&Filter=pdenId=notcontains('NM')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "uwi,pdenId,pdenType,source,parentStratUnitId,stringId,uniqueIdentifier"
+								},
+								{
+									"key": "orderBy",
+									"value": "pdenid desc"
+								},
+								{
+									"key": "Filter",
+									"value": "provincestate=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "activeind=equals('Y')"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "uwi=notcontains('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "commingled=equals('N')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=notcontains('NM')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PS activeInd to N",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"value\" : \"test\",\r\n  \"path\" : \"/remark\",\r\n  \"op\" : \"replace\"}]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/prodstrings/{{uwi}}/{{source}}/{{stringId}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"prodstrings",
+								"{{uwi}}",
+								"{{source}}",
+								"{{stringId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProdString Create WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//postman.setNextRequest('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"variable_key\", \"variable_value\");\r",
+									"pm.globals.set(\"variable_key\", \"variable_value\");\r",
+									"pm.collectionVariables.get(\"variable_key\");\r",
+									"pm.variables.get(\"variable_key\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PROD_STRING\",\r\n\"SourceKey\": \"{{psKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProdString WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PPZ activeInd to N",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonebatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"pdenId\": \"{{pdenId}}\",\r\n    \"pdenType\": \"{{type}}\",\r\n    \"source\":  \"{{source}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId}}\",\r\n    \"patchDocument\": [{\"value\" : \"test\", \"path\" : \"/remark\", \"op\" : \"replace\"}]\r\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPZ Create WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//postman.setNextRequest('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_PROD_ZONE\",\r\n\"SourceKey\": \"{{ppzKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPZ WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PDEN activeInd to N",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"value\" : \"test\",\r\n  \"path\" : \"/remark\",\r\n  \"op\" : \"replace\"}]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens/{{pdenId}}/{{type}}/{{source}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens",
+								"{{pdenId}}",
+								"{{type}}",
+								"{{source}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//postman.setNextRequest('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"SourceKey\": \"{{pdenKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC MP + OS",
+			"item": [
+				{
+					"name": "Fake Request to ck to skip next",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (pm.globals.get('pdenId') != null) {\r",
+									"    postman.setNextRequest(\"Pden Create MP Job\");\r",
+									"    console.log(\"Skipping Getting new entity since found globals one\")\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "postman",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/basic-auth",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"basic-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEntity Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData;\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.pdenId).to.exist;\r",
+									"        pm.globals.set(\"pdenId\", valData.pdenId);\r",
+									"        pm.expect(valData.pdenType).to.exist;\r",
+									"        pm.globals.set(\"type\", valData.pdenType);\r",
+									"        pm.expect(valData.source).to.exist;\r",
+									"        pm.globals.set(\"source\", valData.source);\r",
+									"        pm.expect(valData.stratUnitId).to.exist;\r",
+									"        pm.globals.set(\"stratUnitId\", valData.stratUnitId)\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"psKey\", valData.uniqueIdentifier);\r",
+									"        pm.globals.set(\"pdenKey\",\"PDEN_ID=\"+valData.pdenId \r",
+									"        +\"|PDEN_TYPE=\" + valData.pdenType +\"|SOURCE=\" + valData.source)\r",
+									"        pm.globals.set(\"ppzKey\",\"PDEN_ID=\"+ valData.pdenId \r",
+									"        +\"|PDEN_TYPE=\" + valData.pdenType +\"|SOURCE=\" + valData.source\r",
+									"        +\"|STRAT_UNIT_ID=\" + valData.stratUnitId)\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId\") +\",\"+ pm.globals.get(\"type\") +\",\"+\r",
+									"            pm.globals.get(\"source\") +\",\"+ pm.globals.get(\"stratUnitId\")\r",
+									"            +\",\"+ pm.globals.get(\"psKey\") +\",\"+ \r",
+									"            pm.globals.get(\"pdenKey\") +\",\"+ pm.globals.get(\"ppzKey\")\r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/prodstrings?fields=uwi,pdenId,pdenType,source,stratUnitId,stringId,uniqueIdentifier&orderBy=pdenid desc&Filter=provincestate=equals('NM')&Filter=activeind=equals('Y')&PageSize=1&Filter=uwi=notcontains('NM')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"prodstrings"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "uwi,pdenId,pdenType,source,stratUnitId,stringId,uniqueIdentifier"
+								},
+								{
+									"key": "orderBy",
+									"value": "pdenid desc"
+								},
+								{
+									"key": "Filter",
+									"value": "provincestate=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "activeind=equals('Y')"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "uwi=notcontains('NM')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create MP Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//postman.setNextRequest('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"SourceKey\": \"{{pdenKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"MP\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden MP Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create OS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 60 Seconds');\r",
+									"setTimeout(() => {}, 60000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"SourceKey\": \"{{pdenKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"OS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden OS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC VC OD LD",
+			"item": [
+				{
+					"name": "Get PVBM Row",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.volumeMethod).to.exist;\r",
+									"        pm.globals.set(\"volumeMethod\", valData.volumeMethod);\r",
+									"        pm.expect(valData.activityType).to.exist;\r",
+									"        pm.globals.set(\"activityType\", valData.activityType);\r",
+									"        pm.expect(valData.productType).to.exist;\r",
+									"        pm.globals.set(\"productType\", valData.productType);\r",
+									"        pm.expect(valData.year).to.exist;\r",
+									"        pm.globals.set(\"year\", valData.year);\r",
+									"        pm.expect(valData.amendmentSeqNo).to.exist;\r",
+									"        pm.globals.set(\"amendmentSeqNo\", valData.amendmentSeqNo);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"pvbmKey\", valData.uniqueIdentifier);\r",
+									"        console.log(\"globals pvbmKey is \" + \r",
+									"            pm.globals.get(\"pvbmKey\"));\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonths+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths?fields=volumeMethod,activityType,productType,year,amendmentSeqNo,uniqueIdentifier&Filter=pdenId=equals('{{pdenId}}')&Filter=provincestate=equals('NM')&Filter=activeind=equals('Y')&Filter=productType=notcontains('WELLS')&Filter=productType=notequal('I-SEPPRESS')&Filter=productType=notcontains('DAY')&orderBy=year desc&PageSize=1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "volumeMethod,activityType,productType,year,amendmentSeqNo,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=equals('{{pdenId}}')"
+								},
+								{
+									"key": "Filter",
+									"value": "provincestate=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "activeind=equals('Y')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('WELLS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notequal('I-SEPPRESS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('DAY')"
+								},
+								{
+									"key": "orderBy",
+									"value": "year desc"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fake Request to ck to skip all PVBM jobs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (pm.globals.get('pvbmKey') == null) {\r",
+									"    postman.setNextRequest(\"Pden Create BR Job\");\r",
+									"    console.log(\"Skipping all PVBM jobs since didn't find a PVBM row as globals one\")\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "postman",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/basic-auth",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"basic-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PVBM activeInd to N",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"value\" : \"test\",\r\n  \"path\" : \"/remark\",\r\n  \"op\" : \"replace\"}]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths/{{pdenId}}/{{type}}/{{source}}/{{volumeMethod}}/{{activityType}}/{{productType}}/{{year}}/{{amendmentSeqNo}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths",
+								"{{pdenId}}",
+								"{{type}}",
+								"{{source}}",
+								"{{volumeMethod}}",
+								"{{activityType}}",
+								"{{productType}}",
+								"{{year}}",
+								"{{amendmentSeqNo}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create VC Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"SourceKey\": \"{{pvbmKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"VC\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM VC Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create LD Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"SourceKey\": \"{{pvbmKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"LD\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM LD Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create OD Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 30 Seconds');\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"SourceKey\": \"{{pvbmKey}}\",\r\n\"pdenId\": \"{{pdenId}}\",\r\n\"pdenType\": \"{{type}}\",\r\n\"pdenSource\": \"{{source}}\",\r\n\"JobOperations\": [\"OD\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM OD Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC BR",
+			"item": [
+				{
+					"name": "Pden Create BR Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"PdenId\": \"{{pdenId}}\",\r\n\"PdenType\":  \"{{type}}\",\r\n\"PdenSource\":  \"{{source}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden BR Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC Loader WS",
+			"item": [
+				{
+					"name": "Get Pden Entity Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData && jsonData.length > 0) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        for (i=0;i<4;i++) {\r",
+									"            var valData = jsonData[i];\r",
+									"            console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"            pm.expect(valData.pdenId).to.exist;\r",
+									"            pm.globals.set(\"pdenId\"+i, valData.pdenId);\r",
+									"            pm.expect(valData.pdenType).to.exist;\r",
+									"            pm.globals.set(\"type\"+i, valData.pdenType);\r",
+									"            pm.expect(valData.source).to.exist;\r",
+									"            pm.globals.set(\"source\"+i, valData.source);\r",
+									"            pm.expect(valData.parentStratUnitId).to.exist;\r",
+									"            pm.globals.set(\"stratUnitId\"+i, valData.parentStratUnitId);\r",
+									"            pm.expect(valData.loadId).to.exist;\r",
+									"            pm.globals.set(\"pdenloadId\"+i, valData.loadId);\r",
+									"            pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"            pm.globals.set(\"pdenKey\"+i, valData.uniqueIdentifier);\r",
+									"            console.log(\"globals are \" + \r",
+									"                pm.globals.get(\"pdenId\"+i) +\",\"+ pm.globals.get(\"type\"+i) +\",\"+\r",
+									"                pm.globals.get(\"source\"+i) +\",\"+ pm.globals.get(\"stratUnitId\"+i)\r",
+									"                +\",\"+ pm.globals.get(\"pdenKey\"+i) \r",
+									"            );\r",
+									"        };\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.clear();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdens+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens?fields=pdenId,pdenType,source,parentStratUnitId,loadId,uniqueIdentifier&provinceState=NM&Filter=activeind=equals('Y')&Filter=pdenStatus=list('OIL^GAS')&Filter=productionMethod=equals('FLOWING')&Filter=onproductionDate=greaterthan('1/1/2010')&Filter=lastproductionDate=greaterthan('1/1/2021')&Filter=commingled=equals('N')&PageSize=4&orderBy=pdenId",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "pdenId,pdenType,source,parentStratUnitId,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "provinceState",
+									"value": "NM"
+								},
+								{
+									"key": "Filter",
+									"value": "activeind=equals('Y')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenStatus=list('OIL^GAS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productionMethod=equals('FLOWING')"
+								},
+								{
+									"key": "Filter",
+									"value": "onproductionDate=greaterthan('1/1/2010')"
+								},
+								{
+									"key": "Filter",
+									"value": "lastproductionDate=greaterthan('1/1/2021')"
+								},
+								{
+									"key": "Filter",
+									"value": "commingled=equals('N')"
+								},
+								{
+									"key": "PageSize",
+									"value": "4"
+								},
+								{
+									"key": "orderBy",
+									"value": "pdenId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PDEN loadId activeInd",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"testLoadId\", 99999999);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenbatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n    ]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PS Entity Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        for (i=0;i<4;i++) {\r",
+									"            var valData = jsonData[i];\r",
+									"            console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"            pm.expect(valData.uwi).to.exist;\r",
+									"            pm.globals.set(\"uwi\"+i, valData.uwi);\r",
+									"            pm.expect(valData.stringId).to.exist;\r",
+									"            pm.globals.set(\"stringId\"+i, valData.stringId);\r",
+									"            pm.expect(valData.loadId).to.exist;\r",
+									"            pm.globals.set(\"psloadId\"+i, valData.loadId);\r",
+									"            pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"            pm.globals.set(\"psKey\"+i, valData.uniqueIdentifier);\r",
+									"            console.log(\"globals are \" + \r",
+									"                pm.globals.get(\"uwi\"+i) +\",\"+ pm.globals.get(\"stringId\"+i) +\",\"+\r",
+									"                pm.globals.get(\"psloadId\"+i) +\",\"+ pm.globals.get(\"psKey\"+i) \r",
+									"            );\r",
+									"        };\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/prodstrings?fields=uwi,stringId,loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&PageSize=4&Filter=pdenId=list('{{pdenId0}}^{{pdenId1}}^{{pdenId2}}^{{pdenId3}}')&orderBy=pdenId",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"prodstrings"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "uwi,stringId,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "PageSize",
+									"value": "4"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=list('{{pdenId0}}^{{pdenId1}}^{{pdenId2}}^{{pdenId3}}')"
+								},
+								{
+									"key": "orderBy",
+									"value": "pdenId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PPZ Entity Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        for (i=0;i<4;i++) {\r",
+									"            var valData = jsonData[i];\r",
+									"            console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"            pm.expect(valData.loadId).to.exist;\r",
+									"            pm.globals.set(\"ppzloadId\"+i, valData.loadId);\r",
+									"            pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"            pm.globals.set(\"ppzKey\"+i, valData.uniqueIdentifier);\r",
+									"            console.log(\"globals are \" + \r",
+									"                pm.globals.get(\"ppzloadId\"+i) +\",\"+ pm.globals.get(\"ppzKey\"+i) \r",
+									"            );\r",
+									"        };\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenprodzones+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones?fields=loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&Filter=pdenId=list('{{pdenId0}}^{{pdenId1}}^{{pdenId2}}^{{pdenId3}}')&orderBy=pdenId&PageSize=4",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=list('{{pdenId0}}^{{pdenId1}}^{{pdenId2}}^{{pdenId3}}')"
+								},
+								{
+									"key": "orderBy",
+									"value": "pdenId"
+								},
+								{
+									"key": "PageSize",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PPZ loadId activeInd",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonebatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId0}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId1}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId2}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId3}}\",\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProdString Create Loader WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load ProdString WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//'Delay For 2 mins'\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PROD_STRING\",\r\n\"LoadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProdString Loader WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPZ Create Loader WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load PPZ WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//'Delay For 2 mins'\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_PROD_ZONE\",\r\n\"LoadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PPZ Loader WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create WS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load Pden WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//'Delay For 2 mins'\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"LoadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"WS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Loader WS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC Loader MP OS",
+			"item": [
+				{
+					"name": "Pden Create Loader MP Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//'Delay For 2mins'\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"LoadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"MP\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Loader MP Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create Loader OS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//'Delay For 2 mins'\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN\",\r\n\"LoadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"OS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Loader OS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC Loader VC OD LD",
+			"item": [
+				{
+					"name": "Get PVBM id0 row Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.volumeMethod).to.exist;\r",
+									"        pm.globals.set(\"pvbmvolumeMethod0\", valData.volumeMethod);\r",
+									"        pm.expect(valData.activityType).to.exist;\r",
+									"        pm.globals.set(\"pvbmactivityType0\", valData.activityType);\r",
+									"        pm.expect(valData.productType).to.exist;\r",
+									"        pm.globals.set(\"pvbmproductType0\", valData.productType);\r",
+									"        pm.expect(valData.year).to.exist;\r",
+									"        pm.globals.set(\"pvbmyear0\", valData.year);\r",
+									"        pm.expect(valData.amendmentSeqNo).to.exist;\r",
+									"        pm.globals.set(\"pvbmamendmentSeqNo0\", valData.amendmentSeqNo);\r",
+									"        pm.expect(valData.loadId).to.exist;\r",
+									"        pm.globals.set(\"pvbmloadId0\", valData.loadId);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"pvbmkey0\", valData.uniqueIdentifier);\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId0\") +\",\"+ pm.globals.get(\"pvbmvolumeMethod0\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmactivityType0\") +\",\"+ pm.globals.get(\"pvbmproductType0\") +\",\"+ \r",
+									"            pm.globals.get(\"pvbmyear0\") +\",\"+ pm.globals.get(\"pvbmamendmentSeqNo0\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmloadId0\") +\",\"+ pm.globals.get(\"pvbmkey0\") \r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonths+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths?fields=pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&Filter=pdenId=equals('{{pdenId0}}')&Filter=productType=notcontains('WELLS')&Filter=productType=notequal('I-SEPPRESS')&Filter=productType=notcontains('DAY')&Filter =productType=notcontains('ALLOW')&orderBy=productType asc&PageSize=1&Filter=year=equals('2021')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=equals('{{pdenId0}}')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('WELLS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notequal('I-SEPPRESS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('DAY')"
+								},
+								{
+									"key": "Filter ",
+									"value": "productType=notcontains('ALLOW')"
+								},
+								{
+									"key": "orderBy",
+									"value": "productType asc"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "year=equals('2021')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PVBM id1 row Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.volumeMethod).to.exist;\r",
+									"        pm.globals.set(\"pvbmvolumeMethod1\", valData.volumeMethod);\r",
+									"        pm.expect(valData.activityType).to.exist;\r",
+									"        pm.globals.set(\"pvbmactivityType1\", valData.activityType);\r",
+									"        pm.expect(valData.productType).to.exist;\r",
+									"        pm.globals.set(\"pvbmproductType1\", valData.productType);\r",
+									"        pm.expect(valData.year).to.exist;\r",
+									"        pm.globals.set(\"pvbmyear1\", valData.year);\r",
+									"        pm.expect(valData.amendmentSeqNo).to.exist;\r",
+									"        pm.globals.set(\"pvbmamendmentSeqNo1\", valData.amendmentSeqNo);\r",
+									"        pm.expect(valData.loadId).to.exist;\r",
+									"        pm.globals.set(\"pvbmloadId1\", valData.loadId);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"pvbmkey1\", valData.uniqueIdentifier);\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId1\") +\",\"+ pm.globals.get(\"pvbmvolumeMethod1\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmactivityType1\") +\",\"+ pm.globals.get(\"pvbmproductType1\") +\",\"+ \r",
+									"            pm.globals.get(\"pvbmyear1\") +\",\"+ pm.globals.get(\"pvbmamendmentSeqNo1\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmloadId1\") +\",\"+ pm.globals.get(\"pvbmkey1\") \r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonths+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths?fields=pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&Filter=pdenId=equals('{{pdenId1}}')&Filter=productType=notcontains('WELLS')&Filter=productType=notequal('I-SEPPRESS')&Filter=productType=notcontains('DAY')&Filter =productType=notcontains('ALLOW')&orderBy=productType asc&PageSize=1&Filter=year=equals('2021')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=equals('{{pdenId1}}')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('WELLS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notequal('I-SEPPRESS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('DAY')"
+								},
+								{
+									"key": "Filter ",
+									"value": "productType=notcontains('ALLOW')"
+								},
+								{
+									"key": "orderBy",
+									"value": "productType asc"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "year=equals('2021')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PVBM id2 row Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.volumeMethod).to.exist;\r",
+									"        pm.globals.set(\"pvbmvolumeMethod2\", valData.volumeMethod);\r",
+									"        pm.expect(valData.activityType).to.exist;\r",
+									"        pm.globals.set(\"pvbmactivityType2\", valData.activityType);\r",
+									"        pm.expect(valData.productType).to.exist;\r",
+									"        pm.globals.set(\"pvbmproductType2\", valData.productType);\r",
+									"        pm.expect(valData.year).to.exist;\r",
+									"        pm.globals.set(\"pvbmyear2\", valData.year);\r",
+									"        pm.expect(valData.amendmentSeqNo).to.exist;\r",
+									"        pm.globals.set(\"pvbmamendmentSeqNo2\", valData.amendmentSeqNo);\r",
+									"        pm.expect(valData.loadId).to.exist;\r",
+									"        pm.globals.set(\"pvbmloadId2\", valData.loadId);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"pvbmkey2\", valData.uniqueIdentifier);\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId2\") +\",\"+ pm.globals.get(\"pvbmvolumeMethod2\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmactivityType2\") +\",\"+ pm.globals.get(\"pvbmproductType2\") +\",\"+ \r",
+									"            pm.globals.get(\"pvbmyear2\") +\",\"+ pm.globals.get(\"pvbmamendmentSeqNo2\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmloadId2\") +\",\"+ pm.globals.get(\"pvbmkey2\") \r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonths+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths?fields=pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&Filter=pdenId=equals('{{pdenId2}}')&Filter=productType=notcontains('WELLS')&Filter=productType=notequal('I-SEPPRESS')&Filter=productType=notcontains('DAY')&Filter =productType=notcontains('ALLOW')&orderBy=productType asc&PageSize=1&Filter=year=equals('2021')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=equals('{{pdenId2}}')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('WELLS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notequal('I-SEPPRESS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('DAY')"
+								},
+								{
+									"key": "Filter ",
+									"value": "productType=notcontains('ALLOW')"
+								},
+								{
+									"key": "orderBy",
+									"value": "productType asc"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "year=equals('2021')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PVBM id3 row Set Globals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {\r",
+									"        console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"        var valData = jsonData[0];\r",
+									"        console.log(\"valdata is \" +JSON.stringify(valData));\r",
+									"        pm.expect(valData.volumeMethod).to.exist;\r",
+									"        pm.globals.set(\"pvbmvolumeMethod3\", valData.volumeMethod);\r",
+									"        pm.expect(valData.activityType).to.exist;\r",
+									"        pm.globals.set(\"pvbmactivityType3\", valData.activityType);\r",
+									"        pm.expect(valData.productType).to.exist;\r",
+									"        pm.globals.set(\"pvbmproductType3\", valData.productType);\r",
+									"        pm.expect(valData.year).to.exist;\r",
+									"        pm.globals.set(\"pvbmyear3\", valData.year);\r",
+									"        pm.expect(valData.amendmentSeqNo).to.exist;\r",
+									"        pm.globals.set(\"pvbmamendmentSeqNo3\", valData.amendmentSeqNo);\r",
+									"        pm.expect(valData.loadId).to.exist;\r",
+									"        pm.globals.set(\"pvbmloadId3\", valData.loadId);\r",
+									"        pm.expect(valData.uniqueIdentifier).to.exist;\r",
+									"        pm.globals.set(\"pvbmkey3\", valData.uniqueIdentifier);\r",
+									"        console.log(\"globals are \" + \r",
+									"            pm.globals.get(\"pdenId3\") +\",\"+ pm.globals.get(\"pvbmvolumeMethod3\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmactivityType3\") +\",\"+ pm.globals.get(\"pvbmproductType3\") +\",\"+ \r",
+									"            pm.globals.get(\"pvbmyear3\") +\",\"+ pm.globals.get(\"pvbmamendmentSeqNo3\")  +\",\"+ \r",
+									"            pm.globals.get(\"pvbmloadId3\") +\",\"+ pm.globals.get(\"pvbmkey3\") \r",
+									"        );\r",
+									"    };\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonths+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths?fields=pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier&Filter=provinceState=equals('NM')&Filter=pdenId=equals('{{pdenId3}}')&Filter=productType=notcontains('WELLS')&Filter=productType=notequal('I-SEPPRESS')&Filter=productType=notcontains('DAY')&Filter =productType=notcontains('ALLOW')&orderBy=productType asc&PageSize=1&Filter=year=equals('2021')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "pdenId,volumeMethod,activityType,productType,year,amendmentSeqNo,loadId,uniqueIdentifier"
+								},
+								{
+									"key": "Filter",
+									"value": "provinceState=equals('NM')"
+								},
+								{
+									"key": "Filter",
+									"value": "pdenId=equals('{{pdenId3}}')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('WELLS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notequal('I-SEPPRESS')"
+								},
+								{
+									"key": "Filter",
+									"value": "productType=notcontains('DAY')"
+								},
+								{
+									"key": "Filter ",
+									"value": "productType=notcontains('ALLOW')"
+								},
+								{
+									"key": "orderBy",
+									"value": "productType asc"
+								},
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "Filter",
+									"value": "year=equals('2021')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PVBMs loadId activeInd",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenvolbymonthbatchpatchnonloadforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod0}}\",\r\n\t\"activityType\": \"{{pvbmactivityType0}}\",\r\n    \"productType\": \"{{pvbmproductType0}}\",\r\n    \"year\": {{pvbmyear0}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo0}},\r\n    \"patchDocument\": [{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod1}}\",\r\n\t\"activityType\": \"{{pvbmactivityType1}}\",\r\n    \"productType\": \"{{pvbmproductType1}}\",\r\n    \"year\": {{pvbmyear1}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo1}},\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod2}}\",\r\n\t\"activityType\": \"{{pvbmactivityType2}}\",\r\n    \"productType\": \"{{pvbmproductType2}}\",\r\n    \"year\": {{pvbmyear2}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo2}},\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod3}}\",\r\n\t\"activityType\": \"{{pvbmactivityType3}}\",\r\n    \"productType\": \"{{pvbmproductType3}}\",\r\n    \"year\": {{pvbmyear3}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo3}},\r\n    \"patchDocument\":[{\"value\" : {{testLoadId}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create Loader VC Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load PVBM VC request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 2 min');\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"loadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"VC\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM Loader VC Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create Loader LD Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load PVBM LD request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 2 min');\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"loadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"LD\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM Loader LD Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PVBM Create Loader OD Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for Load PVBM OD request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 2 min');\r",
+									"setTimeout(() => {}, 120000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"PDEN_VOL_BY_MONTH\",\r\n\"loadId\": \"{{testLoadId}}\",\r\n\"JobOperations\": [\"OD\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden PVBM Loader OD Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC Loader BR",
+			"item": [
+				{
+					"name": "Pden Create Loader BR Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"LoadId\":  \"{{testLoadId}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Loader BR Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Cleanup PVBM rows",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenvolbymonthbatchpatchnonloadforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod0}}\",\r\n\t\"activityType\": \"{{pvbmactivityType0}}\",\r\n    \"productType\": \"{{pvbmproductType0}}\",\r\n    \"year\": {{pvbmyear0}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo0}},\r\n    \"patchDocument\": [{\"value\" : {{pvbmloadId0}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod1}}\",\r\n\t\"activityType\": \"{{pvbmactivityType1}}\",\r\n    \"productType\": \"{{pvbmproductType1}}\",\r\n    \"year\": {{pvbmyear1}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo1}},\r\n    \"patchDocument\":[{\"value\" : {{pvbmloadId1}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod2}}\",\r\n\t\"activityType\": \"{{pvbmactivityType2}}\",\r\n    \"productType\": \"{{pvbmproductType2}}\",\r\n    \"year\": {{pvbmyear2}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo2}},\r\n    \"patchDocument\":[{\"value\" : {{pvbmloadId2}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n\t\"volumeMethod\": \"{{pvbmvolumeMethod3}}\",\r\n\t\"activityType\": \"{{pvbmactivityType3}}\",\r\n    \"productType\": \"{{pvbmproductType3}}\",\r\n    \"year\": {{pvbmyear3}},\r\n    \"amendmentSeqNo\": {{pvbmamendmentSeqNo3}},\r\n    \"patchDocument\":[{\"value\" : {{pvbmloadId3}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cleanup PPZ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonebatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId0}}\",\r\n    \"patchDocument\":[{\"value\" : {{ppzloadId0}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId1}}\",\r\n    \"patchDocument\":[{\"value\" : {{ppzloadId1}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId2}}\",\r\n    \"patchDocument\":[{\"value\" : {{ppzloadId2}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n    \"stratUnitId\":  \"{{stratUnitId3}}\",\r\n    \"patchDocument\":[{\"value\" : {{ppzloadId3}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clenaup Pden/PS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"testLoadId\", 99999999);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenbatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{  \"pdenId\": \"{{pdenId0}}\",\r\n    \"pdenType\": \"{{type0}}\",\r\n    \"source\": \"{{source0}}\",\r\n    \"patchDocument\":[{\"value\" : {{pdenloadId0}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId1}}\",\r\n    \"pdenType\": \"{{type1}}\",\r\n    \"source\": \"{{source1}}\",\r\n    \"patchDocument\":[{\"value\" : {{pdenloadId1}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId2}}\",\r\n    \"pdenType\": \"{{type2}}\",\r\n    \"source\": \"{{source2}}\",\r\n    \"patchDocument\":[{\"value\" : {{pdenloadId2}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]},\r\n {  \"pdenId\": \"{{pdenId3}}\",\r\n    \"pdenType\": \"{{type3}}\",\r\n    \"source\": \"{{source3}}\",\r\n    \"patchDocument\":[{\"value\" : {{pdenloadId3}},  \"path\" : \"/loadId\",  \"op\" : \"replace\"}]}\r\n    ]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create BR pdenId0 Job for cleanup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for pdenId0\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 1.5 mins');\r",
+									"//setTimeout(() => {}, 90000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"PdenId\": \"{{pdenId0}}\",\r\n\"PdenType\":  \"{{type0}}\",\r\n\"PdenSource\":  \"{{source0}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create BR pdenId1 Job for cleanup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for pdenId1\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 1.5 mins');\r",
+									"//etTimeout(() => {}, 90000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"PdenId\": \"{{pdenId1}}\",\r\n\"PdenType\":  \"{{type1}}\",\r\n\"PdenSource\":  \"{{source1}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create BR pdenId2 Job for cleanup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for pdenId2\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 1.5 mins');\r",
+									"//setTimeout(() => {}, 90000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"PdenId\": \"{{pdenId2}}\",\r\n\"PdenType\":  \"{{type2}}\",\r\n\"PdenSource\":  \"{{source2}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pden Create BR pdenId3 Job for cleanup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for pdenId3\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 1.5 mins');\r",
+									"//setTimeout(() => {}, 90000);\r",
+									"\r",
+									"//Eventually will want to clear all globals\r",
+									"pm.globals.clear();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"PdenId\": \"{{pdenId3}}\",\r\n\"PdenType\":  \"{{type3}}\",\r\n\"PdenSource\":  \"{{source3}}\",\r\n\"JobOperations\": [\"BR\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC SWS",
+			"item": [
+				{
+					"name": "Well Create SWS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//('Delay For 90 Seconds');\r",
+									"setTimeout(() => {}, 90000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"WELL\",\r\n\"JobOperations\": [\"SWS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Well SWS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									"//Eventually will want to clear all globals\r",
+									"//pm.globals.clear;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+							"// This client information if for SWS ONLY as LOADER.WELL user",
+							"const clientId = '45756f7e-bbc0-4c90-963a-8fc62991bfe5';",
+							"const clientSecret = 'a.~pjG_387Y_MDs2v9~R4-sdo6O5MN2za5';",
+							"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+							"const getTokenRequest = {",
+							"  method: 'POST',",
+							"  url: tokenUrl,",
+							"  body: {",
+							"      mode: 'formdata',",
+							"      header: {",
+							"        'Accept': 'application/json',",
+							"        'Content-Type': 'application/x-www-form-urlencoded'",
+							"      },",
+							"      formdata: [",
+							"          { key: 'grant_type', value: 'client_credentials' },",
+							"          { key: 'client_id', value: clientId },",
+							"          { key: 'client_secret', value: clientSecret },",
+							"          { key: 'scope', value: scope }",
+							"      ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"  const jsonResponse = response.json();",
+							"  const newAccessToken = jsonResponse.access_token;",
+							"  pm.variables.set('access_token', newAccessToken);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs BC RSWS",
+			"item": [
+				{
+					"name": "Well Create RSWS Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST RestJob for SourceKey WS request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Successful RestJob Key retrieval in Resp \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.jobKey).to.exist;\r",
+									"    pm.globals.set(\"jobKey\", jsonData.jobKey);\r",
+									"    console.log('job key is '+pm.globals.get(\"jobKey\"));\r",
+									"    console.log(\"jsondata is \" +JSON.stringify(jsonData));\r",
+									"});\r",
+									"//Delay For 60 Seconds but really can't know how long to wait to see it completed; depends on how many updates ;\r",
+									"setTimeout(() => {}, 60000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"TableName\": \"WELL\",\r\n\"JobOperations\": [\"RSWS\"],\r\n\"ProvinceState\": \"NM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wait cycle",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid);\r",
+									"\r",
+									"//setting the wait time to happen when this request is completed\r",
+									"setTimeout(() => {}, 30000);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//pm.test(\"Status code is 200\", function () {\r",
+									"//   var jsonData = pm.response.json();\r",
+									"//    if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"    // set nextRequest to this same request if test fails\r",
+									"    // this is a way to cycle until the job ends WARNING possible endless loop\r",
+									"//    console.log(\"Setting next req to wait cycle\")\r",
+									"//    postman.setNextRequest(\"Wait cycle\");\r",
+									"//    pm.response.to.have.status(200);\r",
+									"    //now test passes so unset \"Wait cycle\" so te actual next Request in line willprocess\r",
+									"//    console.log(\"Clearing next req\")\r",
+									"//    postman.setNextRequest();\r",
+									"//});\r",
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            console.log(\"Setting next req to wait cycle\")\r",
+									"            postman.setNextRequest(\"Wait cycle\");\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            console.log(\"Job completed - Moving on to next req\")\r",
+									"            postman.setNextRequest();\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            console.log(\"Bad req for job - Moving on to next req\")\r",
+									"            postman.setNextRequest();\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            console.log(\"Job not found - Moving on to next req\")\r",
+									"            postman.setNextRequest();\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            console.log(\"Job Faulted - Moving on to next req\")\r",
+									"            postman.setNextRequest();\r",
+									"            break;\r",
+									"        default:\r",
+									"            console.log(\"unknown code - Moving on to next req\")\r",
+									"            postman.setNextRequest();\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Well RSWS Job Status Check",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const theid = pm.globals.get(\"jobKey\")\r",
+									"console.log('this job id is '+ theid)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Job status is Completed\", function () {\r",
+									"    var statMessages = pm.response.code;\r",
+									"    switch (statMessages) {\r",
+									"        case 303:\r",
+									"            //Job is Queued or Executing\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 200:\r",
+									"            tests[\"Job status is Completed\"] = statMessages === 200\r",
+									"            break;\r",
+									"        case 400:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 404:\r",
+									"            //Job not found\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        case 500:\r",
+									"            //Job is faulted\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"            break;\r",
+									"        default:\r",
+									"            tests[\"Job status is Completed\"] = false;\r",
+									"    }\r",
+									"    console.log(tests)\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        if (jsonData) {console.log(\"jsondata is \" +JSON.stringify(jsonData))};\r",
+									"        pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.unset(\"jobKey\");\r",
+									"//Eventually will want to clear all globals\r",
+									"//pm.globals.clear;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjob+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs/{{jobKey}}",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"{{jobKey}}"
+							],
+							"query": [
+								{
+									"key": "theid",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+							"// This client information if for RSWS ONLY as LOADER.WELL user",
+							"const clientId = '45756f7e-bbc0-4c90-963a-8fc62991bfe5';",
+							"const clientSecret = 'a.~pjG_387Y_MDs2v9~R4-sdo6O5MN2za5';",
+							"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+							"const getTokenRequest = {",
+							"  method: 'POST',",
+							"  url: tokenUrl,",
+							"  body: {",
+							"      mode: 'formdata',",
+							"      header: {",
+							"        'Accept': 'application/json',",
+							"        'Content-Type': 'application/x-www-form-urlencoded'",
+							"      },",
+							"      formdata: [",
+							"          { key: 'grant_type', value: 'client_credentials' },",
+							"          { key: 'client_id', value: clientId },",
+							"          { key: 'client_secret', value: clientSecret },",
+							"          { key: 'scope', value: scope }",
+							"      ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"  const jsonResponse = response.json();",
+							"  const newAccessToken = jsonResponse.access_token;",
+							"  pm.variables.set('access_token', newAccessToken);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+					"",
+					"const clientId = '2c406d94-7885-46e7-b83e-7b655aa21372';",
+					"const clientSecret = 'oRfBEhXVR5iety.QekLG-l1uHKY?C0]5';",
+					"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+					"const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: tokenUrl,",
+					"  body: {",
+					"      mode: 'formdata',",
+					"      header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"      },",
+					"      formdata: [",
+					"          { key: 'grant_type', value: 'client_credentials' },",
+					"          { key: 'client_id', value: clientId },",
+					"          { key: 'client_secret', value: clientSecret },",
+					"          { key: 'scope', value: scope }",
+					"      ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (err, response) => {",
+					"  const jsonResponse = response.json();",
+					"  const newAccessToken = jsonResponse.access_token;",
+					"  pm.variables.set('access_token', newAccessToken);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	]
+}

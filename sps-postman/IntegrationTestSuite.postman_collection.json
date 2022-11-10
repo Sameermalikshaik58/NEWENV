@@ -1,0 +1,4985 @@
+{
+	"info": {
+		"_postman_id": "68c28b68-325e-4b01-b4c6-2eb045cc6271",
+		"name": "IntegrationTestSuite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ApiCrossReferences",
+			"item": [
+				{
+					"name": "ApiCrossReferences",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the ApiCrossReferences Get Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/apicrossreferences",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"apicrossreferences"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BusinessAssociates",
+			"item": [
+				{
+					"name": "Business Associate By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Business associates get request status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.businessassociateoperators+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/businessassociates",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"businessassociates"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CmgFormationMembers",
+			"item": [
+				{
+					"name": "CmgFormationMembers Get Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the CmgFormation Members Get Request Status code is 200 or Not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.cmgformationmembers+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/cmgformationmembers",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cmgformationmembers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CurrentActivityDetail",
+			"item": [
+				{
+					"name": "Get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"CurrentActivityDetail GET 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/currentactivitydetails?Filter=USERID=equals('A')&ProvinceState=30&ActivityDate=2020-08-14",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"currentactivitydetails"
+							],
+							"query": [
+								{
+									"key": "Filter",
+									"value": "USERID=equals('A')"
+								},
+								{
+									"key": "ProvinceState",
+									"value": "30"
+								},
+								{
+									"key": "ActivityDate",
+									"value": "2020-08-14"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fields",
+			"item": [
+				{
+					"name": "Fields Get Request by providing an ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status of the Get Request of the Field for the Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.json().fieldId).equals(\"035344\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/fields/035344",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"fields",
+								"035344"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filed Get Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get request of field whther the Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/fields?ProvinceState=NM",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"fields"
+							],
+							"query": [
+								{
+									"key": "ProvinceState",
+									"value": "NM"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "HealthChecks",
+			"item": [
+				{
+					"name": "Get Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/healthchecks",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"healthchecks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HoleDirections",
+			"item": [
+				{
+					"name": "HoleDirections",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Get request of HoleDirections Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/holedirections",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"holedirections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HoleDirections By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the HoleDirections By Get Request ID Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/holedirections/H",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"holedirections",
+								"H"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LegalCongressLocs",
+			"item": [
+				{
+					"name": "LegalCongressLocs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get request of LegalCongressLoc Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/legalcongresslocs/30025401150000",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"legalcongresslocs",
+								"30025401150000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OperatorXrefs",
+			"item": [
+				{
+					"name": "OperatorXrefs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the OperatorXrefs Get Response time is less than 1000ms or not\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/operatorxrefs?source=IHSE",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"operatorxrefs"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "IHSE"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReportingIds",
+			"item": [
+				{
+					"name": "Create ReportingId",
+					"item": [
+						{
+							"name": "Get ReportingId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Get ReportingId Request  Status code is 200 or not\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.reportingids+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids?PdenId=NM00007777",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids"
+									],
+									"query": [
+										{
+											"key": "PdenId",
+											"value": "NM00007777"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Reporting Ids",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.reportingidsforcreation+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/reportingids",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reportingids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pdens",
+			"item": [
+				{
+					"name": "Delete A Pden",
+					"item": [
+						{
+							"name": "ReportingID Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"REPORTING ID POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.reportingidsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReportingId Get Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"ReportingId Get Inserted Record\", function () {\r",
+											"    pm.variables.set(\"inserted_reporting_key\", pm.response.json()[0].reportingKey);\r",
+											"    pm.expect(pm.response.json().length).to.eql(1);       \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.reportingids+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids?filter=pdenid=equals('ABC123')&fields=reportingkey",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "pdenid=equals('ABC123')"
+										},
+										{
+											"key": "fields",
+											"value": "reportingkey"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SPSGet Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the SPSGet get status code is 200 or not\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/spsbrargumentvalues?ProvinceState=NM",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"spsbrargumentvalues"
+									],
+									"query": [
+										{
+											"key": "ProvinceState",
+											"value": "NM"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pden Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDEN POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdensforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Prod String Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PROD STRING POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.prodstringsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"stringid\" : 1,\r\n        \"uwi\": \"3004521699\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/prodstrings",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"prodstrings"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PdenVolByMonth Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDENVOLBYMONTH POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenvolbymonthsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"volumeMethod\" : \"REPORTED\",\r\n        \"productType\" : \"P-OIL\",\r\n        \"activityType\" : \"PRODUCTION\",\r\n        \"year\" : 2099,\r\n        \"amendmentSeqNo\" : 0,\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenvolbymonths",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenvolbymonths"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PdenVolDisposition Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the PDENVolDispostion  post request status code is 204 or not\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenvoldispositionforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pdenId\": \"ABC123\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"volumeMethod\" : \"REPORTED\",\r\n    \"productType\" : \"P-OIL\",\r\n    \"activityType\" : \"PRODUCTION\",\r\n    \"periodType\" : \"MONTH\",\r\n    \"dispositionObsNo\" : 1,\r\n    \"dispositionDate\" : \"2099-02-02 11:11:11\",\r\n    \"amendmentSeqNo\" : 0,\r\n    \"provinceState\": \"NM\",\r\n    \"remark\": \"unit test\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenvoldispositions",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenvoldispositions"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PdenProdZone Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDENPRODZONE POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenprodzonesforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"StratUnitId\" : \"ABC123\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenprodzones",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenprodzones"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PdenProdZoneDetail Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDENPRODZONEDETAIL POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenprodzonedetailsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"completionOrder\" : 1,\r\n        \"year\" : 2099,\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenprodzonedetails",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenprodzonedetails"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PdenOperHist Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDENOPERHIST POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenoperatorhistoriesforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"ABC123\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"operator\" : \"ABC123\",\r\n        \"operatorObsNo\" : 1,\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenoperhists",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenoperhists"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SpsBrErrors Post Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the SpsBrErros post request status code is 400 or not\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.spsbrerrorsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n        \"brKey\" : {{br_key}},\r\n\t\t\"sourceKey\": \"PDEN_ID=ABC123|PDEN_TYPE=PDEN_WELL|SOURCE=IHSE\",\r\n\t\t\"tableName\": \"PDEN\",\r\n\t\t\"columnName\": \"PDEN_ID\",\r\n        \"errorValue\" : \"ABC123\",\r\n        \"ErrorDescription\" : \"ABC123\",\r\n        \"loadId\" : 123,\r\n        \"provinceState\": \"NM\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/spsbrerrors",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"spsbrerrors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pden Get Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											" pm.test(\"PDEN GET 200\", function () {     \r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.pden+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/ABC123/PDEN_WELL/IHSE",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"ABC123",
+										"PDEN_WELL",
+										"IHSE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pden DELETE Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDEN DELETE 204\", function () {\r",
+											"    console.log(pm.variables.get(\"inserted_reporting_key\"));\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.pden+json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/{{inserted_reporting_key}}/ABC123/PDEN_WELL/IHSE",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"{{inserted_reporting_key}}",
+										"ABC123",
+										"PDEN_WELL",
+										"IHSE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SpsHistoryOfChange Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Check whether the SPHistoryofChange get request status code is 200 or not\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.spshistoryofchanges+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/spshistoryofchanges",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"spshistoryofchanges"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReportingID Delete Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"REPORTING ID DELETED 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.reportingidsforcreation+json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids/{{inserted_reporting_key}}",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids",
+										"{{inserted_reporting_key}}"
+									],
+									"query": [
+										{
+											"key": "tableName",
+											"value": "pden",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "HistoryOfChanges Delete Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HISTORY OF CHANGES DELETED 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/spshistoryofchanges/PDEN_ID%3DABC123%7CPDEN_TYPE%3DPDEN_WELL%7CSOURCE%3DIHSE",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"spshistoryofchanges",
+										"PDEN_ID%3DABC123%7CPDEN_TYPE%3DPDEN_WELL%7CSOURCE%3DIHSE"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create A Pden",
+					"item": [
+						{
+							"name": "Create Reporting ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"REPORTING ID POST 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.reportingidsforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"NM00007777\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"unit test\"\r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reporting Id Get Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get Inserted ReportingId  Record\", function () {\r",
+											"    pm.variables.set(\"inserted_reporting_ID\", pm.response.json()[0].reportingKey);\r",
+											"    pm.response.to.have.status(200);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.reportingids+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/reportingids?filter=pdenid=equals('NM00007777')&fields=reportingkey",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reportingids"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "pdenid=equals('NM00007777')"
+										},
+										{
+											"key": "fields",
+											"value": "reportingkey"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Non Existent Pden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Pden Get Request Status code is 404 or Not \", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdens+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/NM00007777/",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"NM00007777",
+										""
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create the New Pden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Pden Get Request Status code is 204 or Not \", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdensforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"pdenId\": \"NM00007777\",\r\n\t\t\"pdenType\": \"PDEN_WELL\",\r\n\t\t\"source\": \"IHSE\",\r\n        \"provinceState\": \"NM\",\r\n        \"remark\": \"First test\",\r\n        \"BATTERY_ID\": \"\",\r\n        \"ACTIVE_IND\": \"Y\",\r\n        \"FACILITY_ID\": \"\",\r\n        \"BASE_DEPTH_UOM\": \"\",\r\n        \"SET_GOR_UOM\": \"\",\r\n        \"TOP_DEPTH_UOM\": \"\",\r\n        \"OIL_DENSITY_TYPE\": \"\",\r\n        \"OPERATIONAL_STATUS\": \"\",\r\n        \"PENALTY_RELIEF\": \"\",\r\n        \"DATA_SOURCE\": \"\",\r\n        \"ALLOW_TYPE\": \"\",\r\n         \"ENHANCED_RECOVERY_TYPE\": \"\",\r\n          \"WELLHEAD_PRESS_UOM\": \"\",\r\n           \"LOCATION_DESC_TYPE\": \"\"\r\n        \r\n        \r\n        \r\n        \r\n        \r\n        \r\n        \r\n        \r\n\r\n        \r\n        \r\n        \r\n\t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get the created Pden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Pden Get Request Status code is 200 or not \", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/vnd.sps.pden+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/NM00007777/PDEN_WELL/IHSE/",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"NM00007777",
+										"PDEN_WELL",
+										"IHSE",
+										""
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update the Pden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/vnd.sps.pdenbatchpatchforupdate+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\r\n    \"pdenId\": \"NM00007777\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"PatchDocument\": [\r\n            {\r\n            \"value\": \"Postman Test\",\r\n            \"path\": \"/Remark\",\r\n            \"op\": \"replace\"\r\n        }]\r\n}]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/NM00007777/PDEN_WELL/IHSE",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"NM00007777",
+										"PDEN_WELL",
+										"IHSE"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"PDEN  ID is DELETED 204\", function () {\r",
+											"     console.log(pm.variables.get(\"inserted_reporting_ID\"));\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdens/{{inserted_reporting_ID}}/NM00007777/PDEN_WELL/IHSE",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdens",
+										"{{inserted_reporting_ID}}",
+										"NM00007777",
+										"PDEN_WELL",
+										"IHSE"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pden Get Request by providing Primary Key details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Pden Get Request Status code is 200 or Not \", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pden+json",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "\"02A2F45DE985DC85636972D164485C4Ekkj\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens/1300210253163513320/PDEN_WELL/IHSE",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens",
+								"1300210253163513320",
+								"PDEN_WELL",
+								"IHSE"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH pden",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenwithprodstringsforupdate+json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdens/1300210253163513320/PDEN_WELL/IHSE",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdens",
+								"1300210253163513320",
+								"PDEN_WELL",
+								"IHSE"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenProdZoneDetails",
+			"item": [
+				{
+					"name": "POST (batch)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PdenProdZoneDetails 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonedetailsforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"aofSlope\": 0,\r\n    \"bhfp\": 0,\r\n    \"bhfpUom\": \"string\",\r\n    \"bhpDate\": \"2021-05-03T16:53:23.159Z\",\r\n    \"bhpMethod\": \"string\",\r\n    \"criticalPressure\": 0,\r\n    \"criticalPressureUom\": \"string\",\r\n    \"criticalTemperature\": 0,\r\n    \"criticalTemperatureUom\": \"string\",\r\n    \"dataSource\": \"string\",\r\n    \"effectiveDate\": \"2021-05-03T16:53:23.159Z\",\r\n    \"expiryDate\": \"2021-05-03T16:53:23.159Z\",\r\n    \"gasGravity\": 0,\r\n    \"liquidGravity\": 0,\r\n    \"ppdmGuid\": \"string\",\r\n    \"prodStringType\": \"string\",\r\n    \"provinceState\": \"NM\",\r\n    \"remark\": \"Postman Test\",\r\n    \"tempGradient\": 0,\r\n    \"tempGradientUom\": \"string\",\r\n    \"temperature\": 0,\r\n    \"temperatureUom\": \"string\",\r\n    \"unitAcreage\": 0,\r\n    \"unitAcreageUom\": \"string\",\r\n    \"uwi\": \"string\",\r\n    \"wellNumber\": \"string\",\r\n    \"rowQuality\": \"string\",\r\n    \"loadId\": 0,\r\n    \"pdenId\": \"2300430393032372319\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"stratUnitId\": \"string\",\r\n    \"completionOrder\": 0,\r\n    \"year\": 0\r\n  }\r\n]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get POSTed PdenProdZoneDetail\", function () {\r",
+									"    // there is already one in the table, so check if equal 2\r",
+									"    pm.expect(pm.response.json().length).to.eql(2);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails?filter=pdenid=equals('2300430393032372319')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "pdenid=equals('2300430393032372319')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH (batch)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PdenProdZoneDetails BATCH PATCH 200\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonedetailbatchpatchforupdate+json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"pdenId\": \"2300430393032372319\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"completionOrder\": 0,\r\n    \"year\": 0,\r\n    \"PatchDocument\": [\r\n            {\r\n            \"value\": \"Postman Test\",\r\n            \"path\": \"/remark\",\r\n            \"op\": \"replace\"\r\n        }]\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get PATCHed PdenProdZoneDetail\", function () {\r",
+									"    pm.expect(pm.response.json()[0].remark).to.eql(\"Postman Test\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails?filter=pdenid=equals('2300430393032372319')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "pdenid=equals('2300430393032372319')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get PATCHed PdenProdZoneDetail\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails/2300430393032372319/PDEN_WELL/IHSE/0/0",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails",
+								"2300430393032372319",
+								"PDEN_WELL",
+								"IHSE",
+								"0",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenProdZones",
+			"item": [
+				{
+					"name": "Create ProdZones",
+					"item": [
+						{
+							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Post Pden ProdZone Request  Status code is 204 or not\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.pdenprodzonesforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n        \"pdenId\": \"NM0000003484\",\r\n        \"pdenType\": \"PDEN_WELL\",\r\n        \"source\": \"IHSE\",\r\n        \"stratUnitId\": \"MILKR\",\r\n        \"activeInd\": \"Y\",\r\n        \"baseDepth\": 497.4,\r\n        \"baseDepthUom\": \"M\",\r\n        \"completionBase\": 477.6,\r\n        \"completionBaseUom\": \"M\",\r\n        \"completionDate\": \"12/15/1988 00:00:00\",\r\n        \"completionTop\": 422.1,\r\n        \"completionTopUom\": \"M\",\r\n        \"dataSource\": null,\r\n        \"effectiveDate\": null,\r\n        \"expiryDate\": null,\r\n        \"loadId\": null,\r\n        \"plugbackDate\": null,\r\n        \"ppdmGuid\": null,\r\n        \"provinceState\": \"SK\",\r\n        \"remark\": null,\r\n        \"rowQuality\": null,\r\n        \"stratNameSetId\": \"IHSE\",\r\n        \"stratUnitAge\": 2324500,\r\n        \"stratUnitBaseAge\": 2324000,\r\n        \"topDepth\": 370.6,\r\n        \"topDepthUom\": \"M\",\r\n        \"rowCreatedBy\": \"SK2020-12-30\",\r\n        \"rowChangedBy\": \"SK2021-02-23\",\r\n        \"rowChangedDate\": \"10/24/2015 00:00:00\",\r\n        \"rowCreatedDate\": \"10/24/2015 00:00:00\"\r\n  \t}\r\n]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenprodzones",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenprodzones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Get Pden ProdZone Request  Status code is 200 or not\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenprodzones?PdenId=NM0000003484&pdenType=PDEN_WELL&source=IHSE&stratUnitId=MILKR",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenprodzones"
+									],
+									"query": [
+										{
+											"key": "PdenId",
+											"value": "NM0000003484"
+										},
+										{
+											"key": "pdenType",
+											"value": "PDEN_WELL"
+										},
+										{
+											"key": "source",
+											"value": "IHSE"
+										},
+										{
+											"key": "stratUnitId",
+											"value": "MILKR"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenprodzones/NM0000003484/PDEN_WELL/IHSE/MILKR",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenprodzones",
+										"NM0000003484",
+										"PDEN_WELL",
+										"IHSE",
+										"MILKR"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PdenProdZones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get PdenProdZone request Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenprodzones+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones?PageSize=1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							],
+							"query": [
+								{
+									"key": "PageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH (batch)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenprodzonebatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"pdenId\": \"NM0000007798\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"stratUnitId\": \"404RZNE\",\r\n    \"PatchDocument\": [\r\n            {\r\n            \"value\": \"Postman Test\",\r\n            \"path\": \"/remark\",\r\n            \"op\": \"replace\"\r\n        },{\r\n            \"value\": \"Postman Test\",\r\n            \"path\": \"/\",\r\n            \"op\": \"replace\"\r\n        }]\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzones",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenResearches",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenresearchforcreation+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pdenId\": \"1300220150188403230\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"dataSource\": \"IHSE\",\r\n    \"effectiveDate\": \"08/23/2021 15:04:04\",\r\n    \"expiryDate\": null,\r\n    \"remark\": \"test remark\",\r\n    \"provinceState\": \"NM\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BATCH CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenresearchesforcreation+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"pdenId\": \"1300220150188403230\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"remarkObsNo\": 4,\r\n    \"provinceState\": \"NM\",\r\n    \"remark\":\"hello world\",\r\n    \"remarkDate\":\"2020-02-02 15:30:30\",\r\n    \"remarkType\":\"test\"\r\n},\r\n{\r\n    \"pdenId\": \"1300220150188403230\",\r\n    \"pdenType\": \"PDEN_WELL\",\r\n    \"source\": \"IHSE\",\r\n    \"remarkObsNo\": 5,\r\n    \"provinceState\": \"NM\",\r\n    \"remark\":\"hello world\",\r\n    \"remarkDate\":\"2020-02-02 15:30:30\",\r\n    \"remarkType\":\"test\"\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PdenResearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches/1300220150188403230/PDEN_WELL/IHSE/3",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches",
+								"1300220150188403230",
+								"PDEN_WELL",
+								"IHSE",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PdenResearch Get Request By giving Primary key Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches/1300220150188403230/PDEN_WELL/IHSE/3",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches",
+								"1300220150188403230",
+								"PDEN_WELL",
+								"IHSE",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches/1300220150188403230/PDEN_WELL/IHSE/3",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches",
+								"1300220150188403230",
+								"PDEN_WELL",
+								"IHSE",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches/1300220150188403230/PDEN_WELL/IHSE/4",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches",
+								"1300220150188403230",
+								"PDEN_WELL",
+								"IHSE",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenresearches/1300220150188403230/PDEN_WELL/IHSE/5",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenresearches",
+								"1300220150188403230",
+								"PDEN_WELL",
+								"IHSE",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenVolByMonths",
+			"item": [
+				{
+					"name": "Get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check PdenVolByMonths Get Request  Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.pdenvolbymonth+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths/2300430390789372319/PDEN_WELL/IHSE/REPORTED/PRODUCTION/U-GASWELLS/1951/0",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths",
+								"2300430390789372319",
+								"PDEN_WELL",
+								"IHSE",
+								"REPORTED",
+								"PRODUCTION",
+								"U-GASWELLS",
+								"1951",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"value\": \"9991\",\r\n    \"path\": \"/janVolume\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths/2300430456024972319/PDEN_WELL/IHSE/REPORTED/PRODUCTION/P-GAS/2022/0",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths",
+								"2300430456024972319",
+								"PDEN_WELL",
+								"IHSE",
+								"REPORTED",
+								"PRODUCTION",
+								"P-GAS",
+								"2022",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BATCH Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.pdenvolbymonthsforcreation+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"PdenId\": \"2300430456024972319\",\r\n\t\t\"PdenType\": \"PDEN_WELL\",\r\n\t\t\"Source\": \"IHSE\",\r\n        \"ActivityType\": \"PRODUCTION\",\r\n        \"AMENDMENTSEQNO\": \"0\",\r\n        \"PRODUCTTYPE\": \"P-GAS\",\r\n        \"VOLUMEMETHOD\": \"REPORTED\",\r\n        \"JanVolume\": 1000,\r\n        \"Year\": \"2025\",\r\n        \"ProvinceState\": \"NM\"\r\n\t},\r\n    {\r\n\t\t\"PdenId\": \"2300430456024972319\",\r\n\t\t\"PdenType\": \"PDEN_WELL\",\r\n\t\t\"Source\": \"IHSE\",\r\n        \"ActivityType\": \"PRODUCTION\",\r\n        \"AMENDMENTSEQNO\": \"0\",\r\n        \"PRODUCTTYPE\": \"P-GAS\",\r\n        \"VOLUMEMETHOD\": \"REPORTED\",\r\n        \"JanVolume\": 1001,\r\n        \"Year\": \"1990\",\r\n        \"ProvinceState\": \"NM\"\r\n\t}\r\n]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths/2300430456024972319/PDEN_WELL/IHSE/REPORTED/PRODUCTION/P-GAS/2025/0",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths",
+								"2300430456024972319",
+								"PDEN_WELL",
+								"IHSE",
+								"REPORTED",
+								"PRODUCTION",
+								"P-GAS",
+								"2025",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvolbymonths/2300430456024972319/PDEN_WELL/IHSE/REPORTED/PRODUCTION/P-GAS/1990/0",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvolbymonths",
+								"2300430456024972319",
+								"PDEN_WELL",
+								"IHSE",
+								"REPORTED",
+								"PRODUCTION",
+								"P-GAS",
+								"1990",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenVolDispositions",
+			"item": [
+				{
+					"name": "Create PdenVolDisp",
+					"item": [
+						{
+							"name": "Get PdenVolDisp",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/pdenvoldispositions/1300430392209348450/PDEN_WELL/IHSE/REPORTED/SALES/P-GAS/MONTH/01-DEC-20/1/1/true",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"pdenvoldispositions",
+										"1300430392209348450",
+										"PDEN_WELL",
+										"IHSE",
+										"REPORTED",
+										"SALES",
+										"P-GAS",
+										"MONTH",
+										"01-DEC-20",
+										"1",
+										"1",
+										"true"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PdenVolDisposition Get Request By Primary  Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the PdenVoldisposition Get Request Response time is less than 1000ms or not\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenvoldispositions/1300430392209348450/PDEN_WELL/IHSE/REPORTED/SALES/P-GAS/MONTH/01-DEC-20/1/1/true",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenvoldispositions",
+								"1300430392209348450",
+								"PDEN_WELL",
+								"IHSE",
+								"REPORTED",
+								"SALES",
+								"P-GAS",
+								"MONTH",
+								"01-DEC-20",
+								"1",
+								"1",
+								"true"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pools",
+			"item": [
+				{
+					"name": "Pools",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get Pools Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pools?ProvinceState=NM",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pools"
+							],
+							"query": [
+								{
+									"key": "ProvinceState",
+									"value": "NM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pools Get Request by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get Request by id Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pools/023118",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pools",
+								"023118"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PdenOperHists",
+			"item": [
+				{
+					"name": "PdenOperHists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the PdenOperHist Get Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/pdenprodzonedetails",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pdenprodzonedetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PoolXrefs",
+			"item": [
+				{
+					"name": "PoolXrefs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Check whether the PoolXrefs Get request  Response time is less than 500ms or not\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/poolxrefs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"poolxrefs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProdStrings",
+			"item": [
+				{
+					"name": "Create ProdString",
+					"item": [
+						{
+							"name": "Get ProdStrings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check whether the Get ProdStrings request Status code is 200 or not\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/prodstrings",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"prodstrings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ProdStrings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get ProdStrings request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/prodstrings",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"prodstrings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get Products Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/products",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrArgOperators",
+			"item": [
+				{
+					"name": "SpsBrArgOperators",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get SpsBrArgOperators Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrargoperators?argumentType=SET",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrargoperators"
+							],
+							"query": [
+								{
+									"key": "argumentType",
+									"value": "SET"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrArgumentTypes",
+			"item": [
+				{
+					"name": "SpsBrArgumentTypes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get SpsBrArgumentTypes Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsbrargumenttypes+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrargumenttypes",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrargumenttypes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrArgumentValues",
+			"item": [
+				{
+					"name": "SpsBrArgumentValues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the GetSpsBrArgumentValues Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrargumentvalues?ProvinceState=NM",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrargumentvalues"
+							],
+							"query": [
+								{
+									"key": "ProvinceState",
+									"value": "NM"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrErrors",
+			"item": [
+				{
+					"name": "SpsBrErrors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get SpsBrErrors Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsbrerrores+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrerrors?PageNumber=1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrerrors"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SpsBrErrors Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the Get SpsBrErrors Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsbrerrorsstaging+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrerrors/b958989f-b544-44cb-93ad-e97d35a9df0c",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrerrors",
+								"b958989f-b544-44cb-93ad-e97d35a9df0c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrOperatorRules",
+			"item": [
+				{
+					"name": "SprBrOperatorRules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsBrOperatorRules Request Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbroperatorrules?op=OR",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbroperatorrules"
+							],
+							"query": [
+								{
+									"key": "op",
+									"value": "OR"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsBrSeverities",
+			"item": [
+				{
+					"name": "SpsBrSeverities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsBrSeverities Request Status code is 200 or not \", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsbrseverites",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsbrseverites"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsHistoryOfChanges",
+			"item": [
+				{
+					"name": "SpsHistoryofChanges",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsHistoryofChanges Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spshistoryofchanges+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spshistoryofchanges",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spshistoryofchanges"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsProcessStatuses",
+			"item": [
+				{
+					"name": "SpsProcessStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsProcessStatuses Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsprocessstatuses",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsprocessstatuses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsProcessSubStatuses",
+			"item": [
+				{
+					"name": "SpsProcessSubStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsProcessSubsStatuses Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsprocesssubstatuses?processType=BASE_LOAD",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsprocesssubstatuses"
+							],
+							"query": [
+								{
+									"key": "processType",
+									"value": "BASE_LOAD"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobDetails",
+			"item": [
+				{
+					"name": "SpsRestJobDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsRestJobDetails Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjobdetails+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobdetails",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobdetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsRestJobs",
+			"item": [
+				{
+					"name": "SpsRestJobs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsRestJobs Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjobs+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/spsrestjobs",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpsSparkTabColumns",
+			"item": [
+				{
+					"name": "SpsSparkTabColumns",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsSparkTabColumns Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/spssparktabcolumns?Fields=tableName&Filter=businessRulesInd=equals('Y')&PageSize=1000",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spssparktabcolumns"
+							],
+							"query": [
+								{
+									"key": "Fields",
+									"value": "tableName"
+								},
+								{
+									"key": "Filter",
+									"value": "businessRulesInd=equals('Y')"
+								},
+								{
+									"key": "PageSize",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StratUnits",
+			"item": [
+				{
+					"name": "StratUnits",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the StratUnits Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/stratunits",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"stratunits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wells",
+			"item": [
+				{
+					"name": "GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GetWells\", function () {    \r",
+									"    pm.variables.set(\"originalRemark\", pm.response.json()[0].remark);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/wells?filter=uwi=equals('30039255970000')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "uwi=equals('30039255970000')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Wells Batch Patch \", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/* Runs as Apollo */\r",
+									"\r",
+									"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';\r",
+									"\r",
+									"const clientId = '990d3f2e-f1ab-48d9-b29f-841a24e9d8a7';\r",
+									"const clientSecret = 'eXn7Q~FoaVQKKPIznUJKHdxWA27WhQCIfg3Gz';\r",
+									"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'\r",
+									"const getTokenRequest = {\r",
+									"  method: 'POST',\r",
+									"  url: tokenUrl,\r",
+									"  body: {\r",
+									"      mode: 'formdata',\r",
+									"      header: {\r",
+									"        'Accept': 'application/json',\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"      },\r",
+									"      formdata: [\r",
+									"          { key: 'grant_type', value: 'client_credentials' },\r",
+									"          { key: 'client_id', value: clientId },\r",
+									"          { key: 'client_secret', value: clientSecret },\r",
+									"          { key: 'scope', value: scope }\r",
+									"      ]\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(getTokenRequest, (err, response) => {\r",
+									"  const jsonResponse = response.json();\r",
+									"  const newAccessToken = jsonResponse.access_token;\r",
+									"  pm.variables.set('access_token', newAccessToken);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.wellforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\" \r\n    },\r\n    {\r\n        \"value\": \"N\",\r\n        \"path\": \"/activeInd\",\r\n        \"op\": \"replace\" \r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/wells/30039255970000",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells",
+								"30039255970000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get PATCHed WELL \", function () {\r",
+									"    pm.expect(pm.response.json().remark).to.eql(\"Postman Test\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/wells/30039255970000",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells",
+								"30039255970000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH (batch)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Wells Batch Patch Old Value\", function () {        \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-type",
+								"value": "application/vnd.sps.wellbatchpatchforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"uwi\": \"30039255970000\",\r\n    \"PatchDocument\": [\r\n            {\r\n            \"value\":  \"{{originalRemark}}\",\r\n            \"path\": \"/remark\",\r\n            \"op\": \"replace\"\r\n        }]\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/wells",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GetWellsWithDetails 200 \", function () {        \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.wellswithdetails+json",
+								"type": "text"
+							},
+							{
+								"key": "Acce",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/wells?filter=uwi=equals('30039255970000')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "uwi=equals('30039255970000')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.wellforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"value\":  \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n}]\r\n"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/wells/30039255970000",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wells",
+								"30039255970000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WellBaHistories",
+			"item": [
+				{
+					"name": "LIC-OPER UWI 14",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"baServiceType\": \"OPERATOR\",\r\n  \"expiryDate\": \"2022-02-07T19:44:47.290Z\",\r\n  \"remark\": \"Postman Test\",\r\n  \"dataSource\": \"IHSM_OCD\",\r\n  \"provinceState\": \"NM\",\r\n  \"reasonType\": \"TEST\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upsert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforupsertbr+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n    \"uwi\": \"30015404510000\",\r\n    \"baId\": \"216046\",\r\n    \"source\": \"IHSE\",\r\n    \"effectiveDate\": \"2022-02-07 19:50:26\",\r\n    \"baServiceType\": \"OPERATOR\",    \r\n    \"remark\": \"Postman Test\",\r\n    \"dataSource\": \"IHSM_OCD\",\r\n    \"provinceState\": \"NM\",\r\n    \"reasonType\": \"LIC-OPER\"\r\n}    "
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/216046/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"216046",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "COMP-OPER UWI 14",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"baServiceType\": \"OPERATOR\",\r\n  \"expiryDate\": \"2022-02-07T19:44:47.290Z\",\r\n  \"remark\": \"Postman Test\",\r\n  \"dataSource\": \"IHSM_OCD\",\r\n  \"provinceState\": \"NM\",\r\n  \"reasonType\": \"TEST\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upsert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforupsertbr+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n    \"uwi\": \"30015404510000\",\r\n    \"baId\": \"216046\",\r\n    \"source\": \"IHSE\",\r\n    \"effectiveDate\": \"2022-02-07 19:50:26\",\r\n    \"baServiceType\": \"OPERATOR\",\r\n    \"remark\": \"Postman Test\",\r\n    \"dataSource\": \"IHSM_OCD\",\r\n    \"provinceState\": \"NM\",\r\n    \"reasonType\": \"COMP-OPER\"\r\n}    "
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/216046/IHSE/2022-02-07 19:50:26",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"216046",
+										"IHSE",
+										"2022-02-07 19:50:26"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CURR-OPER UWI 10",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"baServiceType\": \"OPERATOR\",\r\n  \"expiryDate\": \"2022-02-07T19:44:47.290Z\",\r\n  \"remark\": \"Postman Test\",\r\n  \"dataSource\": \"IHSM_OCD\",\r\n  \"provinceState\": \"NM\",\r\n  \"reasonType\": \"TEST\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015463320000/21604/IHSE/2022-02-07 19:50:25",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015463320000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:25"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upsert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforupsertbr+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n    \"uwi\": \"30015463320000\",\r\n    \"baId\": \"216051\",\r\n    \"source\": \"IHSE\",\r\n    \"effectiveDate\": \"2022-02-07 19:50:25\",\r\n    \"baServiceType\": \"OPERATOR\",    \r\n    \"remark\": \"Postman Test\",\r\n    \"dataSource\": \"IHSM_OCD\",\r\n    \"provinceState\": \"NM\",\r\n    \"reasonType\": \"CURR-OPER\"\r\n}"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015463320000/21604/IHSE/2022-02-07 19:50:25",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015463320000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:25"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforcreation+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"baServiceType\": \"OPERATOR\",\r\n  \"expiryDate\": \"2022-02-07T19:44:47.290Z\",\r\n  \"remark\": \"Postman Test\",\r\n  \"dataSource\": \"IHSM_OCD\",\r\n  \"provinceState\": \"NM\",\r\n  \"reasonType\": \"CURR-OPER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:24",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.wellbahistory+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:24",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Ten Digit CURR-OPER Filter",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.wellbahistories+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories?filter=uwi=startswith('3001540451')&filter=reasonType=equals('CURR-OPER')",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "uwi=startswith('3001540451')"
+										},
+										{
+											"key": "filter",
+											"value": "reasonType=equals('CURR-OPER')"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.sps.wellbahistoryforupdate+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/reasonType\",\r\n    \"op\": \"replace\"\r\n}]"
+								},
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:24",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get After Update",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.sps.wellbahistory+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:24",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://{{base_url}}/api/wellbahistories/30015404510000/21604/IHSE/2022-02-07 19:50:24",
+									"protocol": "https",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"wellbahistories",
+										"30015404510000",
+										"21604",
+										"IHSE",
+										"2022-02-07 19:50:24"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"/* Runs as Apollo */",
+							"",
+							"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+							"",
+							"const clientId = '990d3f2e-f1ab-48d9-b29f-841a24e9d8a7';",
+							"const clientSecret = 'eXn7Q~FoaVQKKPIznUJKHdxWA27WhQCIfg3Gz';",
+							"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+							"const getTokenRequest = {",
+							"  method: 'POST',",
+							"  url: tokenUrl,",
+							"  body: {",
+							"      mode: 'formdata',",
+							"      header: {",
+							"        'Accept': 'application/json',",
+							"        'Content-Type': 'application/x-www-form-urlencoded'",
+							"      },",
+							"      formdata: [",
+							"          { key: 'grant_type', value: 'client_credentials' },",
+							"          { key: 'client_id', value: clientId },",
+							"          { key: 'client_secret', value: clientSecret },",
+							"          { key: 'scope', value: scope }",
+							"      ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"  const jsonResponse = response.json();",
+							"  const newAccessToken = jsonResponse.access_token;",
+							"  pm.variables.set('access_token', newAccessToken);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "WellCompletions",
+			"item": [
+				{
+					"name": "Wellcompletions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Wellcompletions Get request Status code is 200 or not\", function () {\r",
+									"pm.globals.set(\"variable_key\", \"variable_value\");\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/wellcompletions?PageSize=1&filter=uwi=equals('203D091D094G1000')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wellcompletions"
+							],
+							"query": [
+								{
+									"key": "PageSize",
+									"value": "1"
+								},
+								{
+									"key": "filter",
+									"value": "uwi=equals('203D091D094G1000')"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WellLicenses",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.welllicenseforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"uwi\": \"30025497670000\",\r\n  \"source\": \"ABCD\",\r\n  \"licenseId\": \"1\",\r\n  \"provinceState\": \"NM\",\r\n  \"activeInd\": \"N\",\r\n  \r\n  \"agent\": \"string\",\r\n  \"applicationId\": \"string\",\r\n  \"authorizedStratUnitId\": \"string\",\r\n  \"biddingRoundNum\": \"string\",\r\n  \"contractor\": \"string\",\r\n  \"directionToLoc\": 0,\r\n  \"directionToLocUom\": \"string\",\r\n  \"distanceRefPoint\": \"string\",\r\n  \"distanceToLoc\": 0,\r\n  \"distanceToLocUom\": \"string\",\r\n  \"drillRigNum\": \"string\",\r\n  \"drillSlotNo\": 0,\r\n  \"drillTool\": \"string\",\r\n  \"effectiveDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"exceptionGranted\": \"string\",\r\n  \"exceptionRequested\": \"string\",\r\n  \"expiredInd\": \"F\",\r\n  \"expiryDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"feesPaidInd\": \"F\",\r\n  \"licensee\": \"string\",\r\n  \"licenseeContactId\": \"string\",\r\n  \"licenseDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"licenseNum\": \"string\",\r\n  \"noOfWells\": 0,\r\n  \"offshoreCompletionType\": \"string\",\r\n  \"permitReferenceNum\": \"string\",\r\n  \"permitReissueDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"permitType\": \"string\",\r\n  \"platformName\": \"string\",\r\n  \"ppdmGuid\": \"string\",\r\n  \"projectedDepth\": 0,\r\n  \"projectedDepthUom\": \"string\",\r\n  \"projectedStratUnitId\": \"string\",\r\n  \"projectedTvd\": 0,\r\n  \"projectedTvdUom\": \"string\",\r\n  \"proposedSpudDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"purpose\": \"string\",\r\n  \"rateScheduleId\": \"string\",\r\n  \"regulation\": \"string\",\r\n  \"regulatoryAgency\": \"string\",\r\n  \"regulatoryContactId\": \"string\",\r\n  \"remark\": \"string\",\r\n  \"rigCode\": \"string\",\r\n  \"rigSfType\": \"string\",\r\n  \"rigSubstrHeight\": 0,\r\n  \"rigSubstrHeightUom\": \"string\",\r\n  \"rigSupportFacilityId\": \"string\",\r\n  \"rigType\": \"string\",\r\n  \"sectionOfRegulation\": \"string\",\r\n  \"stratNameSetId\": \"string\",\r\n  \"surveyor\": \"string\",\r\n  \"targetObjectiveFluid\": \"string\",\r\n  \"violationInd\": \"F\",\r\n  \"rowQuality\": \"string\",\r\n  \"dataSource\": \"string\",\r\n  \"deleteDate\": \"2022-04-15T15:58:42.127Z\",\r\n  \"licenseStatus\": \"UNAPPROVED\",\r\n  \"originalConfidentialType\": \"string\",\r\n  \"originalLicensee\": \"string\",\r\n  \"projectedStratAge\": 0,\r\n  \"rule3738Case\": \"string\",\r\n  \"rule3738Type\": \"string\",\r\n  \"scoutId\": \"string\",\r\n  \"stackedLateralInd\": \"F\",\r\n  \"targetDepth\": 0,\r\n  \"targetDepthUom\": \"string\",\r\n  \"targetStratUnitId\": \"string\",\r\n  \"wellObjective\": \"string\",\r\n  \"wellType\": \"string\",\r\n  \"submitDate\": \"2022-04-15T15:58:42.127Z\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/welllicenses",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welllicenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.welllicense+json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/welllicenses/30025497670000/1/ABCD",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welllicenses",
+								"30025497670000",
+								"1",
+								"ABCD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.welllicenseforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/remark\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"Postman Test\",\r\n    \"path\": \"/RegulatoryAgency\",\r\n    \"op\": \"replace\"\r\n}]"
+						},
+						"url": {
+							"raw": "https://{{base_url}}/api/welllicenses/30025497670000/1/ABCD",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welllicenses",
+								"30025497670000",
+								"1",
+								"ABCD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get After Update",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.welllicenses+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/welllicenses?filter=uwi=equals('30025497670000')&filter=source=equals('ABCD')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welllicenses"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "uwi=equals('30025497670000')"
+								},
+								{
+									"key": "filter",
+									"value": "source=equals('ABCD')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/welllicenses/30025497670000/1/ABCD",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welllicenses",
+								"30025497670000",
+								"1",
+								"ABCD"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"/* Runs as Apollo */",
+							"",
+							"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+							"",
+							"const clientId = '990d3f2e-f1ab-48d9-b29f-841a24e9d8a7';",
+							"const clientSecret = 'eXn7Q~FoaVQKKPIznUJKHdxWA27WhQCIfg3Gz';",
+							"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+							"const getTokenRequest = {",
+							"  method: 'POST',",
+							"  url: tokenUrl,",
+							"  body: {",
+							"      mode: 'formdata',",
+							"      header: {",
+							"        'Accept': 'application/json',",
+							"        'Content-Type': 'application/x-www-form-urlencoded'",
+							"      },",
+							"      formdata: [",
+							"          { key: 'grant_type', value: 'client_credentials' },",
+							"          { key: 'client_id', value: clientId },",
+							"          { key: 'client_secret', value: clientSecret },",
+							"          { key: 'scope', value: scope }",
+							"      ]",
+							"  }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"  const jsonResponse = response.json();",
+							"  const newAccessToken = jsonResponse.access_token;",
+							"  pm.variables.set('access_token', newAccessToken);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "WellPerforations",
+			"item": [
+				{
+					"name": "Wellperforations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"WellPerforations Get request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/wellperforations?filter=uwi=equals('30015031460001')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wellperforations"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "uwi=equals('30015031460001')"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WellTests",
+			"item": [
+				{
+					"name": "WellTests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"WellTests Get Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}/api/welltests?filter=uwi=equals('42367311410000')",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"welltests"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "uwi=equals('42367311410000')"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "XrefStatuses",
+			"item": [
+				{
+					"name": "XrefStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\" XrefStatus Get Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.xrefstatuses+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{base_url}}/api/xrefstatuses",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"xrefstatuses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+					"",
+					"const clientId = '2c406d94-7885-46e7-b83e-7b655aa21372';",
+					"const clientSecret = 'oRfBEhXVR5iety.QekLG-l1uHKY?C0]5';",
+					"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default'",
+					"const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: tokenUrl,",
+					"  body: {",
+					"      mode: 'formdata',",
+					"      header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"      },",
+					"      formdata: [",
+					"          { key: 'grant_type', value: 'client_credentials' },",
+					"          { key: 'client_id', value: clientId },",
+					"          { key: 'client_secret', value: clientSecret },",
+					"          { key: 'scope', value: scope }",
+					"      ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (err, response) => {",
+					"  const jsonResponse = response.json();",
+					"  const newAccessToken = jsonResponse.access_token;",
+					"  pm.variables.set('access_token', newAccessToken);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "inserted_reporting_key",
+			"value": ""
+		},
+		{
+			"key": "br_key",
+			"value": ""
+		},
+		{
+			"key": "inserted_reporting_ID",
+			"value": ""
+		}
+	]
+}

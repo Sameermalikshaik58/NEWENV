@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "9968eabc-e98a-4381-8e32-6365f5818291",
+		"name": "Rest Jobs Run NON-PROD Cloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SpsRestJobs",
+			"item": [
+				{
+					"name": "SpsRestJobs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check whether the SpsRestJobs Request Status code is 200 or not\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.sps.spsrestjobs+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url}}/api/spsrestjobs",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loadId\": null,\r\n  \"sourceKey\": \"UWI=30041209810100|SOURCE=IHSE|STRING_ID=1\",\r\n  \"pdenId\": \"1300210412098198289\",\r\n  \"pdenType\": \"PDEN_WELL\",\r\n  \"pdenSource\": \"IHSE\",\r\n  \"jobOperations\": [\r\n    \"WS\"\r\n  ],\r\n  \"tableName\": \"PROD_STRING\",\r\n  \"columnName\": null,\r\n  \"provinceState\": \"NM\",\r\n  \"value\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/api/spsrestjobs",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE BR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforcreation+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loadId\": 20211218072949,\r\n  \"sourceKey\": null,\r\n  \"pdenId\": null,\r\n  \"pdenType\": null,\r\n  \"pdenSource\": null,\r\n  \"jobOperations\": [\r\n    \"BR\"\r\n  ],\r\n  \"tableName\": null,\r\n  \"columnName\": null,\r\n  \"provinceState\": \"NM\",\r\n  \"value\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/api/spsrestjobs",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"value\": \"MP\",\r\n    \"path\": \"/jobOperation\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"WS Comp\",\r\n    \"path\": \"/jobDetailRemark\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"Completed\",    \r\n    \"path\": \"/jobStatus\",\r\n    \"op\": \"replace\"\r\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/api/spsrestjobs/77261",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"77261"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH BR",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.sps.spsrestjobforupdate+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"value\": \"BR\",\r\n    \"path\": \"/jobOperation\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"BR Comp\",\r\n    \"path\": \"/jobDetailRemark\",\r\n    \"op\": \"replace\"\r\n},\r\n{\r\n    \"value\": \"Completed\",    \r\n    \"path\": \"/jobStatus\",\r\n    \"op\": \"replace\"\r\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/api/spsrestjobs/76966",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spsrestjobs",
+								"76966"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const tokenUrl = 'https://login.microsoftonline.com/c1156c2f-a3bb-4fc4-ac07-3eab96da8d10/oauth2/v2.0/token';",
+					"",
+					"const clientId = '2c406d94-7885-46e7-b83e-7b655aa21372';",
+					"const clientSecret = 'oRfBEhXVR5iety.QekLG-l1uHKY?C0]5';",
+					"const scope = 'api://e6afa8f6-7c15-41c6-b919-142655b96b87/.default';",
+					"",
+					"const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: tokenUrl,",
+					"  body: {",
+					"      mode: 'formdata',",
+					"      header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"      },",
+					"      formdata: [",
+					"          { key: 'grant_type', value: 'client_credentials' },",
+					"          { key: 'client_id', value: clientId },",
+					"          { key: 'client_secret', value: clientSecret },",
+					"          { key: 'scope', value: scope }",
+					"      ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (err, response) => {",
+					"  const jsonResponse = response.json();",
+					"  const newAccessToken = jsonResponse.access_token;",
+					"  pm.variables.set('access_token', newAccessToken);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "inserted_reporting_key",
+			"value": ""
+		},
+		{
+			"key": "br_key",
+			"value": ""
+		},
+		{
+			"key": "inserted_reporting_ID",
+			"value": ""
+		}
+	]
+}
